@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Không có quyền";
+}
+
+<div class="delete-page">
+    <div class="delete-card">
+        <h2>Không có quyền truy cập</h2>
+        <p>Tài khoản của bạn không có quyền sử dụng chức năng này.</p>
+
+        <div class="warning-box">
+            Vui lòng đăng nhập bằng tài khoản phù hợp.
+        </div>
+
+        <a asp-controller="Home" asp-action="Index" class="btn-light-spa">Về trang chủ</a>
+        <a asp-controller="Account" asp-action="Login" class="btn-spa">Đăng nhập lại</a>
+    </div>
+</div>

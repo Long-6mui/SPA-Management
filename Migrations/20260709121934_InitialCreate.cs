@@ -16,44 +16,31 @@ namespace SPASMART.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "DichVus",
+                name: "DichVuSanPhams",
                 columns: table => new
                 {
-                    MaDichVu = table.Column<int>(type: "int", nullable: false)
+                    MaDVSP = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TenDichVu = table.Column<string>(type: "longtext", nullable: false)
+                    TenDVSP = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    MoTa = table.Column<string>(type: "longtext", nullable: false)
+                    Loai = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MoTa = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Gia = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    ThoiLuong = table.Column<int>(type: "int", nullable: false),
+                    ThoiLuong = table.Column<int>(type: "int", nullable: true),
+                    HanSuDung = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    DonViTinh = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SoLuongTon = table.Column<int>(type: "int", nullable: true),
+                    HinhAnh = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TrangThai = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DichVus", x => x.MaDichVu);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "SanPhams",
-                columns: table => new
-                {
-                    MaSanPham = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TenSanPham = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LoaiSanPham = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    HanSuDung = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DonViTinh = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SoLuongTon = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SanPhams", x => x.MaSanPham);
+                    table.PrimaryKey("PK_DichVuSanPhams", x => x.MaDVSP);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -69,6 +56,28 @@ namespace SPASMART.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VaiTros", x => x.MaVaiTro);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Vouchers",
+                columns: table => new
+                {
+                    MaVoucher = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    TenVoucher = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MaCode = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GiaTriGiam = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    NgayBatDau = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    NgayKetThuc = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    TrangThai = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vouchers", x => x.MaVoucher);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -108,9 +117,9 @@ namespace SPASMART.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     SoDienThoaiKhach = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    EmailKhach = table.Column<string>(type: "longtext", nullable: false)
+                    EmailKhach = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    GioiTinh = table.Column<string>(type: "longtext", nullable: false)
+                    GioiTinh = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NgaySinh = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     MaTaiKhoan = table.Column<int>(type: "int", nullable: true)
@@ -156,34 +165,6 @@ namespace SPASMART.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Vouchers",
-                columns: table => new
-                {
-                    MaVoucher = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    MaCode = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TenVoucher = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    GiaTriGiam = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    NgayBatDau = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    NgayKetThuc = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    TrangThai = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MaKhachHang = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Vouchers", x => x.MaVoucher);
-                    table.ForeignKey(
-                        name: "FK_Vouchers_KhachHangs_MaKhachHang",
-                        column: x => x.MaKhachHang,
-                        principalTable: "KhachHangs",
-                        principalColumn: "MaKhachHang");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "LichHens",
                 columns: table => new
                 {
@@ -196,17 +177,17 @@ namespace SPASMART.Migrations
                     GhiChu = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     MaKhachHang = table.Column<int>(type: "int", nullable: false),
-                    MaDichVu = table.Column<int>(type: "int", nullable: false),
+                    MaDVSP = table.Column<int>(type: "int", nullable: false),
                     MaNhanVien = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LichHens", x => x.MaLichHen);
                     table.ForeignKey(
-                        name: "FK_LichHens_DichVus_MaDichVu",
-                        column: x => x.MaDichVu,
-                        principalTable: "DichVus",
-                        principalColumn: "MaDichVu",
+                        name: "FK_LichHens_DichVuSanPhams_MaDVSP",
+                        column: x => x.MaDVSP,
+                        principalTable: "DichVuSanPhams",
+                        principalColumn: "MaDVSP",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_LichHens_KhachHangs_MaKhachHang",
@@ -254,6 +235,10 @@ namespace SPASMART.Migrations
                     TongTien = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     GiamGia = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     ThanhTien = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    HinhThucThanhToan = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SoTienDaThanhToan = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    NgayThanhToan = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     TrangThai = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     MaLichHen = table.Column<int>(type: "int", nullable: false),
@@ -286,22 +271,22 @@ namespace SPASMART.Migrations
                     DonGia = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     ThanhTien = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     MaPhieuNhap = table.Column<int>(type: "int", nullable: false),
-                    MaSanPham = table.Column<int>(type: "int", nullable: false)
+                    MaDVSP = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ChiTietPhieuNhaps", x => x.MaChiTietPhieuNhap);
                     table.ForeignKey(
+                        name: "FK_ChiTietPhieuNhaps_DichVuSanPhams_MaDVSP",
+                        column: x => x.MaDVSP,
+                        principalTable: "DichVuSanPhams",
+                        principalColumn: "MaDVSP",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_ChiTietPhieuNhaps_PhieuNhaps_MaPhieuNhap",
                         column: x => x.MaPhieuNhap,
                         principalTable: "PhieuNhaps",
                         principalColumn: "MaPhieuNhap",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ChiTietPhieuNhaps_SanPhams_MaSanPham",
-                        column: x => x.MaSanPham,
-                        principalTable: "SanPhams",
-                        principalColumn: "MaSanPham",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -316,16 +301,16 @@ namespace SPASMART.Migrations
                     DonGia = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     ThanhTien = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     MaHoaDon = table.Column<int>(type: "int", nullable: false),
-                    MaDichVu = table.Column<int>(type: "int", nullable: false)
+                    MaDVSP = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ChiTietHoaDons", x => x.MaChiTietHoaDon);
                     table.ForeignKey(
-                        name: "FK_ChiTietHoaDons_DichVus_MaDichVu",
-                        column: x => x.MaDichVu,
-                        principalTable: "DichVus",
-                        principalColumn: "MaDichVu",
+                        name: "FK_ChiTietHoaDons_DichVuSanPhams_MaDVSP",
+                        column: x => x.MaDVSP,
+                        principalTable: "DichVuSanPhams",
+                        principalColumn: "MaDVSP",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ChiTietHoaDons_HoaDons_MaHoaDon",
@@ -336,36 +321,10 @@ namespace SPASMART.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateTable(
-                name: "ThanhToans",
-                columns: table => new
-                {
-                    MaThanhToan = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    HinhThucThanhToan = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SoTien = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    NgayThanhToan = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    TrangThai = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MaHoaDon = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ThanhToans", x => x.MaThanhToan);
-                    table.ForeignKey(
-                        name: "FK_ThanhToans_HoaDons_MaHoaDon",
-                        column: x => x.MaHoaDon,
-                        principalTable: "HoaDons",
-                        principalColumn: "MaHoaDon",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
             migrationBuilder.CreateIndex(
-                name: "IX_ChiTietHoaDons_MaDichVu",
+                name: "IX_ChiTietHoaDons_MaDVSP",
                 table: "ChiTietHoaDons",
-                column: "MaDichVu");
+                column: "MaDVSP");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChiTietHoaDons_MaHoaDon",
@@ -373,14 +332,14 @@ namespace SPASMART.Migrations
                 column: "MaHoaDon");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ChiTietPhieuNhaps_MaDVSP",
+                table: "ChiTietPhieuNhaps",
+                column: "MaDVSP");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ChiTietPhieuNhaps_MaPhieuNhap",
                 table: "ChiTietPhieuNhaps",
                 column: "MaPhieuNhap");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ChiTietPhieuNhaps_MaSanPham",
-                table: "ChiTietPhieuNhaps",
-                column: "MaSanPham");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HoaDons_MaLichHen",
@@ -401,9 +360,9 @@ namespace SPASMART.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_LichHens_MaDichVu",
+                name: "IX_LichHens_MaDVSP",
                 table: "LichHens",
-                column: "MaDichVu");
+                column: "MaDVSP");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LichHens_MaKhachHang",
@@ -430,16 +389,6 @@ namespace SPASMART.Migrations
                 name: "IX_TaiKhoans_MaVaiTro",
                 table: "TaiKhoans",
                 column: "MaVaiTro");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ThanhToans_MaHoaDon",
-                table: "ThanhToans",
-                column: "MaHoaDon");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vouchers_MaKhachHang",
-                table: "Vouchers",
-                column: "MaKhachHang");
         }
 
         /// <inheritdoc />
@@ -452,16 +401,10 @@ namespace SPASMART.Migrations
                 name: "ChiTietPhieuNhaps");
 
             migrationBuilder.DropTable(
-                name: "ThanhToans");
+                name: "HoaDons");
 
             migrationBuilder.DropTable(
                 name: "PhieuNhaps");
-
-            migrationBuilder.DropTable(
-                name: "SanPhams");
-
-            migrationBuilder.DropTable(
-                name: "HoaDons");
 
             migrationBuilder.DropTable(
                 name: "LichHens");
@@ -470,13 +413,13 @@ namespace SPASMART.Migrations
                 name: "Vouchers");
 
             migrationBuilder.DropTable(
-                name: "DichVus");
-
-            migrationBuilder.DropTable(
-                name: "NhanViens");
+                name: "DichVuSanPhams");
 
             migrationBuilder.DropTable(
                 name: "KhachHangs");
+
+            migrationBuilder.DropTable(
+                name: "NhanViens");
 
             migrationBuilder.DropTable(
                 name: "TaiKhoans");

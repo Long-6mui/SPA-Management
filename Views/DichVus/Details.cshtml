@@ -1,0 +1,49 @@
+﻿@model SPASMART.Models.DichVuSanPham
+
+@{
+    ViewData["Title"] = "Chi tiết dịch vụ";
+}
+
+<div class="detail-page">
+    <div class="detail-card">
+        <div>
+            @if (!string.IsNullOrEmpty(Model.HinhAnh))
+            {
+                <img src="@Model.HinhAnh" class="detail-img" />
+            }
+            else
+            {
+                <div class="detail-img"></div>
+            }
+        </div>
+
+        <div class="detail-info">
+            <span class="badge-spa badge-service">Dịch vụ spa</span>
+
+            <h2 class="mt-3">@Model.TenDVSP</h2>
+
+            <p>@Model.MoTa</p>
+
+            <div class="info-row">
+                <span class="info-label">Giá dịch vụ</span>
+                <span class="info-value">@Model.Gia.ToString("N0") đ</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Thời lượng</span>
+                <span class="info-value">
+                    @(Model.ThoiLuong.HasValue? Model.ThoiLuong + " phút" : "Đang cập nhật")
+                </span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Trạng thái</span>
+                <span class="info-value">@Model.TrangThai</span>
+            </div>
+
+            <div class="mt-4">
+                <a asp-action="Index" class="btn-light-spa">Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div>

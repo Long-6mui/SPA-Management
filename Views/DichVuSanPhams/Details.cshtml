@@ -1,0 +1,65 @@
+﻿@model SPASMART.Models.DichVuSanPham
+
+@{
+    ViewData["Title"] = "Chi tiết dịch vụ & sản phẩm";
+}
+
+<div class="detail-page">
+    <div class="detail-card">
+        <div>
+            @if (!string.IsNullOrEmpty(Model.HinhAnh))
+            {
+                <img src="@Model.HinhAnh" class="detail-img" />
+            }
+            else
+            {
+                <div class="detail-img"></div>
+            }
+        </div>
+
+        <div class="detail-info">
+            <h2>@Model.TenDVSP</h2>
+            <p>@Model.MoTa</p>
+
+            <div class="info-row">
+                <span class="info-label">Loại</span>
+                <span class="info-value">@Model.Loai</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Giá</span>
+                <span class="info-value">@Model.Gia.ToString("N0") đ</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Thời lượng</span>
+                <span class="info-value">@(Model.ThoiLuong.HasValue? Model.ThoiLuong + " phút" : "-")</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Hạn sử dụng</span>
+                <span class="info-value">@(Model.HanSuDung.HasValue? Model.HanSuDung.Value.ToString("dd/MM/yyyy") : "-")</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Đơn vị tính</span>
+                <span class="info-value">@(Model.DonViTinh ?? "-")</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Số lượng tồn</span>
+                <span class="info-value">@(Model.SoLuongTon.HasValue? Model.SoLuongTon.ToString() : "-")</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Trạng thái</span>
+                <span class="info-value">@Model.TrangThai</span>
+            </div>
+
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.MaDVSP" class="btn-spa">Sửa</a>
+                <a asp-action="Index" class="btn-light-spa">Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -19,9 +19,9 @@ namespace SPASMART.Models
         [ForeignKey("MaPhieuNhap")]
         public PhieuNhap? PhieuNhap { get; set; }
 
-        public int MaSanPham { get; set; }
+        public int MaDVSP { get; set; }
 
-        [ForeignKey("MaSanPham")]
-        public SanPham? SanPham { get; set; }
+        [ForeignKey("MaDVSP")]
+        public DichVuSanPham? DichVuSanPham { get; set; }
     }
 }

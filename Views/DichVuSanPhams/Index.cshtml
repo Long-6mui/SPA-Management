@@ -1,0 +1,101 @@
+﻿@model IEnumerable<SPASMART.Models.DichVuSanPham>
+
+@{
+    ViewData["Title"] = "Dịch vụ & Sản phẩm";
+}
+
+<div class="spa-page">
+    <div class="spa-header">
+        <small>SpaSmart Management</small>
+        <h1>Dịch vụ & Sản phẩm</h1>
+        <p>
+            Quản lý danh sách dịch vụ spa, mỹ phẩm, phụ liệu và các sản phẩm được sử dụng trong quá trình vận hành.
+        </p>
+    </div>
+
+    <div class="spa-toolbar">
+        <form asp-action="Index" method="get" class="spa-search">
+            <input type="text" name="keyword" value="@ViewBag.Keyword" placeholder="Tìm theo tên..." />
+
+            <select name="loai">
+                <option value="">Tất cả loại</option>
+                <option value="Dịch vụ" selected="@(ViewBag.Loai == "Dịch vụ")">Dịch vụ</option>
+                <option value="Sản phẩm" selected="@(ViewBag.Loai == "Sản phẩm")">Sản phẩm</option>
+            </select>
+
+            <button type="submit" class="btn-light-spa">Tìm kiếm</button>
+        </form>
+
+        <a asp-action="Create" class="btn-spa">+ Thêm mới</a>
+    </div>
+
+    <div class="spa-card">
+        <table class="spa-table">
+            <thead>
+                <tr>
+                    <th>Hình ảnh</th>
+                    <th>Tên</th>
+                    <th>Loại</th>
+                    <th>Giá</th>
+                    <th>Thời lượng</th>
+                    <th>Tồn kho</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.HinhAnh))
+                            {
+                                <img src="@item.HinhAnh" class="item-img" />
+                            }
+                            else
+                            {
+                                <div class="item-img"></div>
+                            }
+                        </td>
+
+                        <td>
+                            <strong>@item.TenDVSP</strong>
+                            <br />
+                            <small>@item.MoTa</small>
+                        </td>
+
+                        <td>
+                            @if (item.Loai == "Dịch vụ")
+                            {
+                                <span class="badge-spa badge-service">Dịch vụ</span>
+                            }
+                            else
+                            {
+                                <span class="badge-spa badge-product">Sản phẩm</span>
+                            }
+                        </td>
+
+                        <td>@item.Gia.ToString("N0") đ</td>
+
+                        <td>
+                            @(item.ThoiLuong.HasValue? item.ThoiLuong + " phút" : "-")
+                        </td>
+
+                        <td>
+                            @(item.SoLuongTon.HasValue? item.SoLuongTon.ToString() : "-")
+                        </td>
+
+                        <td>@item.TrangThai</td>
+
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.MaDVSP" class="action-link">Xem</a>
+                            <a asp-action="Edit" asp-route-id="@item.MaDVSP" class="action-link">Sửa</a>
+                            <a asp-action="Delete" asp-route-id="@item.MaDVSP" class="action-delete">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

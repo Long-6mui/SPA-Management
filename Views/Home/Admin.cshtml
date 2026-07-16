@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Trang quản trị";
+}
+
+<div class="spa-page">
+    <div class="spa-header">
+        <small>ADMIN SITE</small>
+        <h1>Trang quản trị SpaSmart</h1>
+        <p>
+            Khu vực dành cho quản lý spa và nhân viên nội bộ để quản lý dịch vụ, phụ liệu, lịch hẹn và thanh toán.
+        </p>
+    </div>
+
+    <div class="feature-grid">
+        <a asp-controller="DichVuSanPhams" asp-action="Index" class="feature-card">
+            <div class="feature-icon">🌿</div>
+            <h3>Dịch vụ & Sản phẩm</h3>
+            <p>Quản lý danh sách dịch vụ và sản phẩm trong spa.</p>
+        </a>
+
+        <a asp-controller="PhuLieus" asp-action="Index" class="feature-card">
+            <div class="feature-icon">🧴</div>
+            <h3>Quản lý phụ liệu</h3>
+            <p>Theo dõi mỹ phẩm, khăn, tinh dầu và vật tư.</p>
+        </a>
+
+        <a asp-controller="Home" asp-action="DatLich" class="feature-card">
+            <div class="feature-icon">📅</div>
+            <h3>Lịch hẹn</h3>
+            <p>Quản lý lịch hẹn và trạng thái phục vụ.</p>
+        </a>
+
+        <div class="feature-card">
+            <div class="feature-icon">💳</div>
+            <h3>Thanh toán</h3>
+            <p>Theo dõi hóa đơn và trạng thái thanh toán.</p>
+        </div>
+    </div>
+</div>

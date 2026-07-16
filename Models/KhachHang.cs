@@ -12,9 +12,9 @@ namespace SPASMART.Models
 
         public string SoDienThoaiKhach { get; set; } = string.Empty;
 
-        public string EmailKhach { get; set; } = string.Empty;
+        public string? EmailKhach { get; set; }
 
-        public string GioiTinh { get; set; } = string.Empty;
+        public string? GioiTinh { get; set; }
 
         public DateTime? NgaySinh { get; set; }
 
@@ -24,7 +24,5 @@ namespace SPASMART.Models
         public TaiKhoan? TaiKhoan { get; set; }
 
         public ICollection<LichHen>? LichHens { get; set; }
-
-        public ICollection<Voucher>? Vouchers { get; set; }
     }
 }

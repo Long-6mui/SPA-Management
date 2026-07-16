@@ -33,7 +33,7 @@ namespace SPASMART.Migrations
                     b.Property<decimal>("DonGia")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("MaDichVu")
+                    b.Property<int>("MaDVSP")
                         .HasColumnType("int");
 
                     b.Property<int>("MaHoaDon")
@@ -47,7 +47,7 @@ namespace SPASMART.Migrations
 
                     b.HasKey("MaChiTietHoaDon");
 
-                    b.HasIndex("MaDichVu");
+                    b.HasIndex("MaDVSP");
 
                     b.HasIndex("MaHoaDon");
 
@@ -65,10 +65,10 @@ namespace SPASMART.Migrations
                     b.Property<decimal>("DonGia")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("MaPhieuNhap")
+                    b.Property<int>("MaDVSP")
                         .HasColumnType("int");
 
-                    b.Property<int>("MaSanPham")
+                    b.Property<int>("MaPhieuNhap")
                         .HasColumnType("int");
 
                     b.Property<int>("SoLuong")
@@ -79,42 +79,57 @@ namespace SPASMART.Migrations
 
                     b.HasKey("MaChiTietPhieuNhap");
 
-                    b.HasIndex("MaPhieuNhap");
+                    b.HasIndex("MaDVSP");
 
-                    b.HasIndex("MaSanPham");
+                    b.HasIndex("MaPhieuNhap");
 
                     b.ToTable("ChiTietPhieuNhaps");
                 });
 
-            modelBuilder.Entity("SPASMART.Models.DichVu", b =>
+            modelBuilder.Entity("SPASMART.Models.DichVuSanPham", b =>
                 {
-                    b.Property<int>("MaDichVu")
+                    b.Property<int>("MaDVSP")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MaDichVu"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MaDVSP"));
+
+                    b.Property<string>("DonViTinh")
+                        .HasColumnType("longtext");
 
                     b.Property<decimal>("Gia")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<DateTime?>("HanSuDung")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("HinhAnh")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Loai")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("MoTa")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("SoLuongTon")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TenDVSP")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("TenDichVu")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("ThoiLuong")
+                    b.Property<int?>("ThoiLuong")
                         .HasColumnType("int");
 
                     b.Property<string>("TrangThai")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("MaDichVu");
+                    b.HasKey("MaDVSP");
 
-                    b.ToTable("DichVus");
+                    b.ToTable("DichVuSanPhams");
                 });
 
             modelBuilder.Entity("SPASMART.Models.HoaDon", b =>
@@ -128,6 +143,9 @@ namespace SPASMART.Migrations
                     b.Property<decimal>("GiamGia")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<string>("HinhThucThanhToan")
+                        .HasColumnType("longtext");
+
                     b.Property<int>("MaLichHen")
                         .HasColumnType("int");
 
@@ -136,6 +154,12 @@ namespace SPASMART.Migrations
 
                     b.Property<DateTime>("NgayLap")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("NgayThanhToan")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<decimal>("SoTienDaThanhToan")
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<decimal>("ThanhTien")
                         .HasColumnType("decimal(65,30)");
@@ -167,11 +191,9 @@ namespace SPASMART.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MaKhachHang"));
 
                     b.Property<string>("EmailKhach")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("GioiTinh")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("HoTenKhach")
@@ -210,7 +232,7 @@ namespace SPASMART.Migrations
                     b.Property<TimeSpan>("GioHen")
                         .HasColumnType("time(6)");
 
-                    b.Property<int>("MaDichVu")
+                    b.Property<int>("MaDVSP")
                         .HasColumnType("int");
 
                     b.Property<int>("MaKhachHang")
@@ -228,7 +250,7 @@ namespace SPASMART.Migrations
 
                     b.HasKey("MaLichHen");
 
-                    b.HasIndex("MaDichVu");
+                    b.HasIndex("MaDVSP");
 
                     b.HasIndex("MaKhachHang");
 
@@ -300,37 +322,6 @@ namespace SPASMART.Migrations
                     b.ToTable("PhieuNhaps");
                 });
 
-            modelBuilder.Entity("SPASMART.Models.SanPham", b =>
-                {
-                    b.Property<int>("MaSanPham")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MaSanPham"));
-
-                    b.Property<string>("DonViTinh")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("HanSuDung")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("LoaiSanPham")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("SoLuongTon")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TenSanPham")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("MaSanPham");
-
-                    b.ToTable("SanPhams");
-                });
-
             modelBuilder.Entity("SPASMART.Models.TaiKhoan", b =>
                 {
                     b.Property<int>("MaTaiKhoan")
@@ -359,38 +350,6 @@ namespace SPASMART.Migrations
                     b.HasIndex("MaVaiTro");
 
                     b.ToTable("TaiKhoans");
-                });
-
-            modelBuilder.Entity("SPASMART.Models.ThanhToan", b =>
-                {
-                    b.Property<int>("MaThanhToan")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MaThanhToan"));
-
-                    b.Property<string>("HinhThucThanhToan")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("MaHoaDon")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("NgayThanhToan")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<decimal>("SoTien")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<string>("TrangThai")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("MaThanhToan");
-
-                    b.HasIndex("MaHoaDon");
-
-                    b.ToTable("ThanhToans");
                 });
 
             modelBuilder.Entity("SPASMART.Models.VaiTro", b =>
@@ -425,9 +384,6 @@ namespace SPASMART.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("MaKhachHang")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("NgayBatDau")
                         .HasColumnType("datetime(6)");
 
@@ -444,16 +400,14 @@ namespace SPASMART.Migrations
 
                     b.HasKey("MaVoucher");
 
-                    b.HasIndex("MaKhachHang");
-
                     b.ToTable("Vouchers");
                 });
 
             modelBuilder.Entity("SPASMART.Models.ChiTietHoaDon", b =>
                 {
-                    b.HasOne("SPASMART.Models.DichVu", "DichVu")
+                    b.HasOne("SPASMART.Models.DichVuSanPham", "DichVuSanPham")
                         .WithMany("ChiTietHoaDons")
-                        .HasForeignKey("MaDichVu")
+                        .HasForeignKey("MaDVSP")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -463,28 +417,28 @@ namespace SPASMART.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DichVu");
+                    b.Navigation("DichVuSanPham");
 
                     b.Navigation("HoaDon");
                 });
 
             modelBuilder.Entity("SPASMART.Models.ChiTietPhieuNhap", b =>
                 {
+                    b.HasOne("SPASMART.Models.DichVuSanPham", "DichVuSanPham")
+                        .WithMany("ChiTietPhieuNhaps")
+                        .HasForeignKey("MaDVSP")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SPASMART.Models.PhieuNhap", "PhieuNhap")
                         .WithMany("ChiTietPhieuNhaps")
                         .HasForeignKey("MaPhieuNhap")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SPASMART.Models.SanPham", "SanPham")
-                        .WithMany("ChiTietPhieuNhaps")
-                        .HasForeignKey("MaSanPham")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("DichVuSanPham");
 
                     b.Navigation("PhieuNhap");
-
-                    b.Navigation("SanPham");
                 });
 
             modelBuilder.Entity("SPASMART.Models.HoaDon", b =>
@@ -515,9 +469,9 @@ namespace SPASMART.Migrations
 
             modelBuilder.Entity("SPASMART.Models.LichHen", b =>
                 {
-                    b.HasOne("SPASMART.Models.DichVu", "DichVu")
+                    b.HasOne("SPASMART.Models.DichVuSanPham", "DichVuSanPham")
                         .WithMany("LichHens")
-                        .HasForeignKey("MaDichVu")
+                        .HasForeignKey("MaDVSP")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -531,7 +485,7 @@ namespace SPASMART.Migrations
                         .WithMany("LichHens")
                         .HasForeignKey("MaNhanVien");
 
-                    b.Navigation("DichVu");
+                    b.Navigation("DichVuSanPham");
 
                     b.Navigation("KhachHang");
 
@@ -569,29 +523,11 @@ namespace SPASMART.Migrations
                     b.Navigation("VaiTro");
                 });
 
-            modelBuilder.Entity("SPASMART.Models.ThanhToan", b =>
-                {
-                    b.HasOne("SPASMART.Models.HoaDon", "HoaDon")
-                        .WithMany("ThanhToans")
-                        .HasForeignKey("MaHoaDon")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("HoaDon");
-                });
-
-            modelBuilder.Entity("SPASMART.Models.Voucher", b =>
-                {
-                    b.HasOne("SPASMART.Models.KhachHang", "KhachHang")
-                        .WithMany("Vouchers")
-                        .HasForeignKey("MaKhachHang");
-
-                    b.Navigation("KhachHang");
-                });
-
-            modelBuilder.Entity("SPASMART.Models.DichVu", b =>
+            modelBuilder.Entity("SPASMART.Models.DichVuSanPham", b =>
                 {
                     b.Navigation("ChiTietHoaDons");
+
+                    b.Navigation("ChiTietPhieuNhaps");
 
                     b.Navigation("LichHens");
                 });
@@ -599,15 +535,11 @@ namespace SPASMART.Migrations
             modelBuilder.Entity("SPASMART.Models.HoaDon", b =>
                 {
                     b.Navigation("ChiTietHoaDons");
-
-                    b.Navigation("ThanhToans");
                 });
 
             modelBuilder.Entity("SPASMART.Models.KhachHang", b =>
                 {
                     b.Navigation("LichHens");
-
-                    b.Navigation("Vouchers");
                 });
 
             modelBuilder.Entity("SPASMART.Models.LichHen", b =>
@@ -623,11 +555,6 @@ namespace SPASMART.Migrations
                 });
 
             modelBuilder.Entity("SPASMART.Models.PhieuNhap", b =>
-                {
-                    b.Navigation("ChiTietPhieuNhaps");
-                });
-
-            modelBuilder.Entity("SPASMART.Models.SanPham", b =>
                 {
                     b.Navigation("ChiTietPhieuNhaps");
                 });

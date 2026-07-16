@@ -1,0 +1,154 @@
+﻿@model IEnumerable<SPASMART.Models.DichVuSanPham>
+
+@{
+    ViewData["Title"] = "Quản lý phụ liệu";
+}
+
+<div class="spa-page">
+    <div class="spa-header">
+        <small>SPASMART INVENTORY</small>
+        <h1>Quản lý phụ liệu</h1>
+        <p>
+            Theo dõi mỹ phẩm, tinh dầu, khăn, mặt nạ và các vật tư sử dụng trong quá trình vận hành spa.
+        </p>
+    </div>
+
+    <div class="inventory-stats">
+        <div class="inventory-stat-card">
+            <span>Tổng phụ liệu</span>
+            <strong>@ViewBag.TongPhuLieu</strong>
+        </div>
+
+        <div class="inventory-stat-card">
+            <span>Đang sử dụng</span>
+            <strong>@ViewBag.DangSuDung</strong>
+        </div>
+
+        <div class="inventory-stat-card warning">
+            <span>Sắp hết hàng</span>
+            <strong>@ViewBag.SapHetHang</strong>
+        </div>
+
+        <div class="inventory-stat-card danger">
+            <span>Hết hàng</span>
+            <strong>@ViewBag.HetHang</strong>
+        </div>
+    </div>
+
+    <div class="spa-toolbar">
+        <form asp-action="Index" method="get" class="spa-search">
+            <input type="text" name="keyword" value="@ViewBag.Keyword" placeholder="Tìm phụ liệu..." />
+
+            <select name="trangThai">
+                <option value="">Tất cả trạng thái</option>
+
+                @if (ViewBag.TrangThai == "Đang sử dụng")
+                {
+                    <option value="Đang sử dụng" selected>Đang sử dụng</option>
+                }
+                else
+                {
+                    <option value="Đang sử dụng">Đang sử dụng</option>
+                }
+
+                @if (ViewBag.TrangThai == "Ngừng sử dụng")
+                {
+                    <option value="Ngừng sử dụng" selected>Ngừng sử dụng</option>
+                }
+                else
+                {
+                    <option value="Ngừng sử dụng">Ngừng sử dụng</option>
+                }
+            </select>
+
+            <button type="submit" class="btn-light-spa">Tìm kiếm</button>
+        </form>
+
+        <a asp-action="Create" class="btn-spa">+ Thêm phụ liệu</a>
+    </div>
+
+    <div class="spa-card">
+        <table class="spa-table">
+            <thead>
+                <tr>
+                    <th>Hình ảnh</th>
+                    <th>Tên phụ liệu</th>
+                    <th>Giá</th>
+                    <th>Đơn vị tính</th>
+                    <th>Tồn kho</th>
+                    <th>Hạn sử dụng</th>
+                    <th>Trạng thái</th>
+                    <th>Cảnh báo</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.HinhAnh))
+                            {
+                                <img src="@item.HinhAnh" class="item-img" />
+                            }
+                            else
+                            {
+                                <div class="item-img"></div>
+                            }
+                        </td>
+
+                        <td>
+                            <strong>@item.TenDVSP</strong>
+                            <br />
+                            <small>@item.MoTa</small>
+                        </td>
+
+                        <td>@item.Gia.ToString("N0") đ</td>
+
+                        <td>@(item.DonViTinh ?? "-")</td>
+
+                        <td>
+                            @(item.SoLuongTon.HasValue? item.SoLuongTon.ToString() : "-")
+                        </td>
+
+                        <td>
+                            @(item.HanSuDung.HasValue? item.HanSuDung.Value.ToString("dd/MM/yyyy") : "-")
+                        </td>
+
+                        <td>
+                            @if (item.TrangThai == "Đang sử dụng")
+                            {
+                                <span class="status-pill active">Đang sử dụng</span>
+                            }
+                            else
+                            {
+                                <span class="status-pill inactive">@item.TrangThai</span>
+                            }
+                        </td>
+
+                        <td>
+                            @if (item.SoLuongTon.HasValue && item.SoLuongTon.Value == 0)
+                            {
+                                <span class="stock-alert danger">Hết hàng</span>
+                            }
+                            else if (item.SoLuongTon.HasValue && item.SoLuongTon.Value <= 5)
+                            {
+                                <span class="stock-alert warning">Sắp hết</span>
+                            }
+                            else
+                            {
+                                <span class="stock-alert normal">Ổn định</span>
+                            }
+                        </td>
+
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.MaDVSP" class="action-link">Sửa</a>
+                            <a asp-action="Delete" asp-route-id="@item.MaDVSP" class="action-delete">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

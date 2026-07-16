@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SPASMART")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9af1aad691a2df1e89befdc6efe4fdb5d41e073b")]
 [assembly: System.Reflection.AssemblyProductAttribute("SPASMART")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SPASMART")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

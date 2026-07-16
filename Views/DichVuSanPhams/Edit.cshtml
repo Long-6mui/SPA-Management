@@ -1,0 +1,85 @@
+﻿@model SPASMART.Models.DichVuSanPham
+
+@{
+    ViewData["Title"] = "Sửa dịch vụ & sản phẩm";
+}
+
+<div class="spa-form-page">
+    <div class="spa-form-card">
+        <h2>Sửa dịch vụ & sản phẩm</h2>
+        <p>Cập nhật thông tin dịch vụ spa hoặc sản phẩm/phụ liệu.</p>
+
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="MaDVSP" />
+
+            <div class="mb-3">
+                <label class="form-label">Tên dịch vụ/sản phẩm</label>
+                <input asp-for="TenDVSP" class="form-control" />
+                <span asp-validation-for="TenDVSP" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Loại</label>
+                <select asp-for="Loai" class="form-select">
+                    <option value="Dịch vụ">Dịch vụ</option>
+                    <option value="Sản phẩm">Sản phẩm</option>
+                </select>
+                <span asp-validation-for="Loai" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Mô tả</label>
+                <textarea asp-for="MoTa" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Giá</label>
+                    <input asp-for="Gia" class="form-control" />
+                    <span asp-validation-for="Gia" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Thời lượng</label>
+                    <input asp-for="ThoiLuong" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Hạn sử dụng</label>
+                    <input asp-for="HanSuDung" type="date" class="form-control" />
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Đơn vị tính</label>
+                    <input asp-for="DonViTinh" class="form-control" />
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Số lượng tồn</label>
+                    <input asp-for="SoLuongTon" class="form-control" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Đường dẫn hình ảnh</label>
+                <input asp-for="HinhAnh" class="form-control" />
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Trạng thái</label>
+                <input asp-for="TrangThai" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn-spa">Cập nhật</button>
+            <a asp-action="Index" class="btn-light-spa">Quay lại</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

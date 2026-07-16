@@ -1,5 +1,9 @@
 wwwroot\css\site.css
+wwwroot\css\spasmart.css
 wwwroot\favicon.ico
+wwwroot\images\home\spa-hero.jpg
+wwwroot\images\home\spa-intro.jpg
+wwwroot\images\home\spa-service.jpg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map

@@ -1,8 +1,133 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Trang chủ";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="home-page">
+    <section class="home-hero">
+        <div class="home-hero-content">
+            <small>SPASMART MANAGEMENT</small>
+            <h1>Quản lý spa nhẹ nhàng, hiện đại và trực quan</h1>
+            <p>
+                SpaSmart hỗ trợ quản lý dịch vụ, phụ liệu, lịch hẹn và hoạt động vận hành spa trên một giao diện đơn giản, tinh tế và dễ sử dụng.
+            </p>
+
+            <div class="home-hero-actions">
+                <a asp-controller="DichVus" asp-action="Index" class="btn-home-primary">
+                    Xem dịch vụ
+                </a>
+
+                <a asp-controller="Home" asp-action="DatLich" class="btn-home-secondary">
+                    Đặt lịch hẹn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-intro">
+        <div class="intro-text">
+            <small>Giới thiệu</small>
+            <h2>Hệ thống hỗ trợ vận hành spa một cách khoa học</h2>
+            <p>
+                Trang quản lý được thiết kế theo phong cách tối giản, giúp nhân viên dễ dàng theo dõi phụ liệu, dịch vụ và các thông tin cần thiết trong quá trình phục vụ khách hàng.
+            </p>
+
+            <div class="intro-list">
+                <div>
+                    <span>✦</span>
+                    <p>Quản lý danh sách dịch vụ và sản phẩm trong spa.</p>
+                </div>
+
+                <div>
+                    <span>✦</span>
+                    <p>Theo dõi số lượng tồn kho, hạn sử dụng và trạng thái phụ liệu.</p>
+                </div>
+
+                <div>
+                    <span>✦</span>
+                    <p>Giao diện nhẹ nhàng, phù hợp với phong cách chăm sóc sức khỏe và làm đẹp.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-image-wrap">
+            <img src="~/images/home/spa-intro.jpg" class="intro-image" />
+            <div class="intro-floating-card">
+                <strong>SpaSmart</strong>
+                <span>Clean · Calm · Simple</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-stats">
+        <div class="stat-item">
+            <h3>10+</h3>
+            <p>Dịch vụ & phụ liệu mẫu</p>
+        </div>
+
+        <div class="stat-item">
+            <h3>3</h3>
+            <p>Vai trò sử dụng chính</p>
+        </div>
+
+        <div class="stat-item">
+            <h3>100%</h3>
+            <p>Giao diện dễ thao tác</p>
+        </div>
+
+        <div class="stat-item">
+            <h3>24/7</h3>
+            <p>Hỗ trợ quản lý dữ liệu</p>
+        </div>
+    </section>
+
+    <section class="home-features">
+        <div class="section-title">
+            <small>Chức năng</small>
+            <h2>Các khu vực quản lý chính</h2>
+        </div>
+
+        <div class="feature-grid">
+            <a asp-controller="PhuLieus" asp-action="Index" class="feature-card">
+                <div class="feature-icon">🧴</div>
+                <h3>Quản lý phụ liệu</h3>
+                <p>Theo dõi mỹ phẩm, khăn, tinh dầu, mặt nạ và các vật tư sử dụng trong spa.</p>
+            </a>
+
+            <a asp-controller="DichVuSanPhams" asp-action="Index" class="feature-card">
+                <div class="feature-icon">🌿</div>
+                <h3>Dịch vụ & sản phẩm</h3>
+                <p>Quản lý chung danh sách dịch vụ chăm sóc và sản phẩm đang sử dụng.</p>
+            </a>
+
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>Lịch hẹn</h3>
+                <p>Theo dõi lịch hẹn, khách hàng và trạng thái phục vụ trong ngày.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <h3>Thanh toán</h3>
+                <p>Quản lý hóa đơn, giảm giá, phương thức thanh toán và trạng thái thanh toán.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-service-preview">
+        <div class="preview-image">
+            <img src="~/images/home/spa-service.jpg" />
+        </div>
+
+        <div class="preview-content">
+            <small>Phụ liệu spa</small>
+            <h2>Theo dõi kho phụ liệu rõ ràng hơn</h2>
+            <p>
+                Màn hình quản lý phụ liệu giúp nhân viên kiểm tra số lượng tồn, hạn sử dụng và tình trạng sử dụng của từng sản phẩm trong spa.
+            </p>
+
+            <a asp-controller="PhuLieus" asp-action="Index" class="btn-home-primary">
+                Đi tới quản lý phụ liệu
+            </a>
+        </div>
+    </section>
 </div>

@@ -1,0 +1,48 @@
+﻿@model SPASMART.Models.DichVuSanPham
+
+@{
+    ViewData["Title"] = "Xóa phụ liệu";
+}
+
+<div class="delete-page">
+    <div class="delete-card">
+        <h2>Xóa phụ liệu</h2>
+        <p>Kiểm tra thông tin trước khi xóa khỏi hệ thống.</p>
+
+        <div class="warning-box">
+            Bạn có chắc chắn muốn xóa phụ liệu này không?
+        </div>
+
+        <div class="info-row">
+            <span class="info-label">Tên phụ liệu</span>
+            <span class="info-value">@Model.TenDVSP</span>
+        </div>
+
+        <div class="info-row">
+            <span class="info-label">Giá</span>
+            <span class="info-value">@Model.Gia.ToString("N0") đ</span>
+        </div>
+
+        <div class="info-row">
+            <span class="info-label">Đơn vị tính</span>
+            <span class="info-value">@(Model.DonViTinh ?? "-")</span>
+        </div>
+
+        <div class="info-row">
+            <span class="info-label">Số lượng tồn</span>
+            <span class="info-value">@(Model.SoLuongTon.HasValue? Model.SoLuongTon.ToString() : "-")</span>
+        </div>
+
+        <div class="info-row">
+            <span class="info-label">Trạng thái</span>
+            <span class="info-value">@Model.TrangThai</span>
+        </div>
+
+        <form asp-action="Delete" method="post" class="mt-4">
+            <input type="hidden" asp-for="MaDVSP" />
+
+            <button type="submit" class="btn-danger-spa">Xóa</button>
+            <a asp-action="Index" class="btn-light-spa">Hủy</a>
+        </form>
+    </div>
+</div>

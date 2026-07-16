@@ -111,3 +111,4 @@ D:\Huflit_SPASMART\SPASMART\SPASMART\obj\Debug\net8.0\refint\SPASMART.dll
 D:\Huflit_SPASMART\SPASMART\SPASMART\obj\Debug\net8.0\SPASMART.pdb
 D:\Huflit_SPASMART\SPASMART\SPASMART\obj\Debug\net8.0\SPASMART.genruntimeconfig.cache
 D:\Huflit_SPASMART\SPASMART\SPASMART\obj\Debug\net8.0\ref\SPASMART.dll
+D:\Huflit_SPASMART\SPASMART\SPASMART\obj\Debug\net8.0\SPASMART.sourcelink.json
