@@ -1,0 +1,79 @@
+﻿@model SPASMART.Models.LichHen
+@{
+    ViewData["Title"] = "Chỉnh sửa / Dời lịch hẹn";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="spa-card">
+                <div class="mb-4">
+                    <h3 class="fw-bold mb-1" style="color: var(--spa-primary);">Chỉnh Sửa & Dời Lịch Hẹn</h3>
+                    <p class="text-muted m-0">Điều chỉnh thời gian, kỹ thuật viên hoặc cập nhật trạng thái lịch biểu của khách.</p>
+                </div>
+
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <input type="hidden" asp-for="MaLichHen" />
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="spa-form-label text-muted">Khách Hàng (Cố định)</label>
+                            <select asp-for="MaKhachHang" class="form-select spa-select bg-light" asp-items="ViewBag.MaKhachHang" disabled style="pointer-events: none;">
+                            </select>
+                            <input type="hidden" asp-for="MaKhachHang" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="MaDVSP" class="spa-form-label">Dịch Vụ Đăng Ký</label>
+                            <select asp-for="MaDVSP" class="form-select spa-select" asp-items="ViewBag.MaDVSP" required>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="NgayHen" class="spa-form-label">Ngày Hẹn Mới</label>
+                            <input asp-for="NgayHen" type="date" class="form-control spa-input" asp-format="{0:yyyy-MM-dd}" required />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="GioHen" class="spa-form-label">Giờ Hẹn Mới</label>
+                            <input asp-for="GioHen" type="time" class="form-control spa-input" required />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="MaNhanVien" class="spa-form-label">Kỹ Thuật Viên</label>
+                            <select asp-for="MaNhanVien" class="form-select spa-select" asp-items="ViewBag.MaNhanVien" required>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label asp-for="TrangThai" class="spa-form-label">Trạng Thái Lịch</label>
+                            <select asp-for="TrangThai" class="form-select spa-select fw-semibold">
+                                <option value="Chờ xác nhận">Chờ xác nhận</option>
+                                <option value="Đã xác nhận">Đã xác nhận</option>
+                                <option value="Chờ phục vụ">Chờ phục vụ</option>
+                                <option value="Đã check-in">Đã check-in</option>
+                                <option value="Đã hủy">Đã hủy</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="GhiChu" class="spa-form-label">Ghi Chú</label>
+                        <textarea asp-for="GhiChu" class="form-control spa-textarea" rows="3" placeholder="Nhập lưu ý dời lịch hoặc thay đổi chi tiết yêu cầu..."></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-3 pt-2">
+                        <a asp-action="Index" class="btn spa-btn-secondary">Hủy Bỏ</a>
+                        <button type="submit" class="btn spa-btn-primary">Lưu Thay Đổi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

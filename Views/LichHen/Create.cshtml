@@ -1,0 +1,145 @@
+﻿@model SPASMART.Models.LichHen
+@{
+    ViewData["Title"] = "Đặt lịch hẹn mới";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="spa-card">
+                <div class="mb-4">
+                    <h3 class="fw-bold mb-1" style="color: var(--spa-primary);">Đặt Lịch Hẹn Mới</h3>
+                    <p class="text-muted m-0">Điền đầy đủ thông tin để ghi nhận đặt phòng dịch vụ cho khách hàng.</p>
+                </div>
+
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="MaKhachHang" class="spa-form-label">Khách Hàng</label>
+                            <div class="input-group">
+                                <select asp-for="MaKhachHang" id="selectKhachHang" class="form-select spa-select" asp-items="ViewBag.MaKhachHang" required>
+                                    <option value="">-- Chọn Khách Hàng --</option>
+                                </select>
+                                <button type="button" class="btn spa-btn-outline px-3" style="border-radius: 0 10px 10px 0 !important;" data-bs-toggle="modal" data-bs-target="#themNhanhKhachHangModal">
+                                    + Thêm Nhanh
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="MaDVSP" class="spa-form-label">Dịch Vụ</label>
+                            <select asp-for="MaDVSP" class="form-select spa-select" asp-items="ViewBag.MaDVSP" required>
+                                <option value="">-- Chọn Dịch Vụ --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="NgayHen" class="spa-form-label">Ngày Hẹn</label>
+                            <input asp-for="NgayHen" type="date" class="form-control spa-input" required />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="GioHen" class="spa-form-label">Giờ Hẹn</label>
+                            <input asp-for="GioHen" type="time" class="form-control spa-input" required />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="MaNhanVien" class="spa-form-label">Kỹ Thuật Viên</label>
+                            <select asp-for="MaNhanVien" class="form-select spa-select" asp-items="ViewBag.MaNhanVien" required>
+                                <option value="">-- Chọn KTV phụ trách --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="GhiChu" class="spa-form-label">Ghi Chú</label>
+                        <textarea asp-for="GhiChu" class="form-control spa-textarea" rows="3" placeholder="Yêu cầu đặc biệt của khách (ví dụ: phòng riêng, trà ấm...)"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-3 pt-2">
+                        <a asp-action="Index" class="btn spa-btn-secondary">Quay Lại</a>
+                        <button type="submit" class="btn spa-btn-primary">Xác Nhận Đặt Lịch</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="themNhanhKhachHangModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: var(--spa-radius);">
+            <div class="modal-header border-bottom-0 pb-0 pt-4 px-4">
+                <h5 class="modal-title fw-bold" style="color: var(--spa-primary);">Thêm Khách Hàng Mới</h5>
+                <button type="button" class="btn-close" data-bs-close="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-4 pb-3">
+                <div id="modalAlert" class="alert alert-danger d-none" role="alert"></div>
+                <div class="mb-3">
+                    <label class="spa-form-label">Họ và Tên</label>
+                    <input type="text" id="modalTenKH" class="form-control spa-input" placeholder="Ví dụ: Nguyễn Văn A" />
+                </div>
+                <div class="mb-3">
+                    <label class="spa-form-label">Số điện thoại</label>
+                    <input type="text" id="modalSDT" class="form-control spa-input" placeholder="Ví dụ: 0987654321" />
+                </div>
+            </div>
+            <div class="modal-footer border-top-0 pt-0 px-4 pb-4">
+                <button type="button" class="btn spa-btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" id="btnLuuKhachHang" class="btn spa-btn-primary">Lưu Khách Hàng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById("btnLuuKhachHang").addEventListener("click", function () {
+            var ten = document.getElementById("modalTenKH").value;
+            var sdt = document.getElementById("modalSDT").value;
+            var alertBox = document.getElementById("modalAlert");
+
+            if (!ten || !sdt) {
+                alertBox.textContent = "Vui lòng điền đầy đủ các thông tin bắt buộc!";
+                alertBox.classList.remove("d-none");
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append("tenKhachHang", ten);
+            formData.append("soDienThoai", sdt);
+
+            fetch('/LichHen/ThemNhanhKhachHang', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        var selectKH = document.getElementById("selectKhachHang");
+                        var newOption = new Option(data.tenKhachHang, data.maKhachHang, true, true);
+                        selectKH.add(newOption);
+
+                        var myModalEl = document.getElementById('themNhanhKhachHangModal');
+                        var modalInstance = bootstrap.Modal.getInstance(myModalEl);
+                        modalInstance.hide();
+
+                        document.getElementById("modalTenKH").value = "";
+                        document.getElementById("modalSDT").value = "";
+                        alertBox.classList.add("d-none");
+                    } else {
+                        alertBox.textContent = data.message;
+                        alertBox.classList.remove("d-none");
+                    }
+                })
+                .catch(error => {
+                    alertBox.textContent = "Có lỗi kết nối hệ thống!";
+                    alertBox.classList.remove("d-none");
+                });
+        });
+    </script>
+}

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<SPASMART.Models.LichHen>
+    @{
+    ViewData["Title"] = "Quản lý lịch hẹn";
+    }
+
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold m-0" style="color: var(--spa-primary);">Quản Lý Lịch Hẹn</h2>
+                <p class="text-muted m-0 fs-6">Xem và cập nhật trạng thái đặt chỗ của khách hàng</p>
+            </div>
+            <a asp-action="Create" class="btn spa-btn-primary">+ Thêm Lịch Mới</a>
+        </div>
+
+        <div class="spa-card mb-4 p-4">
+            <form method="get" asp-action="Index" class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label class="spa-form-label">Ngày hẹn</label>
+                    <input type="date" name="filterDate" class="form-control spa-input" value="@ViewBag.CurrentDate" />
+                </div>
+                <div class="col-md-4">
+                    <label class="spa-form-label">Trạng thái</label>
+                    <select name="filterStatus" class="form-select spa-select">
+                        <option value="">-- Tất cả --</option>
+                        <option value="Chờ xác nhận" selected="@(ViewBag.CurrentStatus == "Chờ xác nhận" ? "selected" : null)">Chờ xác nhận</option>
+                        <option value="Đã xác nhận" selected="@(ViewBag.CurrentStatus == "Đã xác nhận" ? "selected" : null)">Đã xác nhận</option>
+                        <option value="Chờ phục vụ" selected="@(ViewBag.CurrentStatus == "Chờ phục vụ" ? "selected" : null)">Chờ phục vụ</option>
+                        <option value="Chờ phục vụ" selected="@(ViewBag.CurrentStatus == "Đã check-in" ? "selected" : null)">Đã check-in</option>
+                        <option value="Chờ phục vụ" selected="@(ViewBag.CurrentStatus == "Đã hủy" ? "selected" : null)">Đã hủy</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn spa-btn-primary w-100">Áp Dụng Bộ Lọc</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="spa-card p-0 overflow-hidden">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" style="border-collapse: separate;">
+                    <thead style="background-color: #F8FAF7;">
+                        <tr>
+                            <th class="ps-4 py-3 border-0" style="color: var(--spa-primary); font-weight: 600;">Khách Hàng</th>
+                            <th class="py-3 border-0" style="color: var(--spa-primary); font-weight: 600;">Số Điện Thoại</th>
+                            <th class="py-3 border-0" style="color: var(--spa-primary); font-weight: 600;">Dịch Vụ Sử Dụng</th>
+                            <th class="py-3 border-0" style="color: var(--spa-primary); font-weight: 600;">Thời Gian</th>
+                            <th class="py-3 border-0" style="color: var(--spa-primary); font-weight: 600;">Trạng Thái</th>
+                            <th class="pe-4 py-3 border-0 text-end" style="color: var(--spa-primary); font-weight: 600;">Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model) {
+                        var statusClass = item.TrangThai switch {
+                            "Chờ xác nhận" => "status-pending",
+                            "Đã xác nhận" => "status-confirmed",
+                            "Chờ phục vụ" => "status-serving",
+                            "Đã check-in" => "status-serving",
+                            "Đã hủy" => "status-cancelled",
+                            _ => ""
+                        };
+                        <tr>
+                            <td class="ps-4 py-3 fw-semibold">
+                                @(item.KhachHang?.HoTenKhach ?? "N/A")
+                            </td>
+                            <td class="py-3">
+                                <span class="text-muted fw-medium">@(item.KhachHang?.SoDienThoaiKhach ?? "Chưa cập nhật")</span>
+                            </td>
+                            <td class="py-3">@(item.DichVuSanPham?.TenDVSP ?? "N/A")</td>
+                            <td class="py-3">
+                                <span class="fw-medium text-dark">@item.NgayHen.ToString("dd/MM/yyyy")</span>
+                                <span class="text-muted d-block" style="font-size: 0.85rem;">@item.GioHen.ToString(@"hh\:mm")</span>
+                            </td>
+                            <td class="py-3">
+                                <span class="badge-status @statusClass">@item.TrangThai</span>
+                            </td>
+                            <td class="pe-4 py-3 text-end">
+                                <a asp-action="Edit" asp-route-id="@item.MaLichHen" class="btn btn-sm spa-btn-outline py-1 px-3">Sửa</a>
+                            </td>
+                        </tr>
+                    }
+                        @if (!Model.Any()) {
+                        <tr>
+                            <td colspan="6" class="text-center py-5 text-muted">Không tìm thấy lịch hẹn nào tương thích.</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

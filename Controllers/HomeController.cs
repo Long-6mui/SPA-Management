@@ -65,7 +65,7 @@ namespace SPASMART.Controllers
 
         public IActionResult DatLich()
         {
-            return View();
+            return RedirectToAction("Index", "LichHen");
         }
     }
 }

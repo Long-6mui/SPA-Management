@@ -20,4 +20,123 @@ html {
 body {
   margin-bottom: 60px;
 }
+/* --- SPA STYLE SYSTEM --- */
+:root {
+    --spa-primary: #5A6B5C; /* Xanh rêu olive ?m t? logo/banner */
+    --spa-primary-hover: #485649;
+    --spa-secondary: #8E9E8C;
+    --spa-bg: #F7F9F6; /* N?n xám nh? pha ánh xanh ?m */
+    --spa-card-bg: #FFFFFF;
+    --spa-text: #2D362E;
+    --spa-text-muted: #6E7E70;
+    --spa-border: #E2E8E3;
+    --spa-radius: 16px; /* Bo góc m?m m?i */
+    --spa-shadow: 0 10px 30px rgba(90, 107, 92, 0.05);
+}
 
+body {
+    background-color: var(--spa-bg) !important;
+    color: var(--spa-text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Ki?u dáng các Card */
+.spa-card {
+    background: var(--spa-card-bg);
+    border: 1px solid var(--spa-border);
+    border-radius: var(--spa-radius);
+    box-shadow: var(--spa-shadow);
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+/* Các tr??ng nh?p li?u (Inputs & Selects) */
+.spa-form-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--spa-text);
+    margin-bottom: 0.5rem;
+}
+
+.spa-input, .spa-select, .spa-textarea {
+    border: 1px solid var(--spa-border) !important;
+    border-radius: 10px !important;
+    padding: 0.65rem 1rem !important;
+    font-size: 0.95rem !important;
+    background-color: #FCFDFB !important;
+    color: var(--spa-text) !important;
+    transition: all 0.2s ease !important;
+}
+
+    .spa-input:focus, .spa-select:focus, .spa-textarea:focus {
+        border-color: var(--spa-primary) !important;
+        box-shadow: 0 0 0 3px rgba(90, 107, 92, 0.15) !important;
+        outline: none !important;
+    }
+
+/* H? th?ng Nút */
+.spa-btn-primary {
+    background-color: var(--spa-primary) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 30px !important; /* Bo tròn dài sang tr?ng */
+    padding: 0.6rem 1.8rem !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+    .spa-btn-primary:hover {
+        background-color: var(--spa-primary-hover) !important;
+        transform: translateY(-1px);
+    }
+
+.spa-btn-outline {
+    background-color: transparent !important;
+    color: var(--spa-primary) !important;
+    border: 1px solid var(--spa-primary) !important;
+    border-radius: 30px !important;
+    padding: 0.6rem 1.8rem !important;
+    transition: all 0.2s ease !important;
+}
+
+    .spa-btn-outline:hover {
+        background-color: var(--spa-primary) !important;
+        color: #fff !important;
+    }
+
+.spa-btn-secondary {
+    background-color: #F0F3EF !important;
+    color: var(--spa-text-muted) !important;
+    border: none !important;
+    border-radius: 30px !important;
+    padding: 0.6rem 1.8rem !important;
+}
+
+/* Tr?ng thái Tags màu s?c nhã nh?n */
+.badge-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-pending {
+    background-color: #FFF8EB;
+    color: #B27B12;
+}
+/* Ch? xác nh?n */
+.status-confirmed {
+    background-color: #ECFDF5;
+    color: #047857;
+}
+/* ?ã xác nh?n */
+.status-serving {
+    background-color: #EFF6FF;
+    color: #1D4ED8;
+}
+/* Ch? ph?c v?/?ã check-in */
+.status-cancelled {
+    background-color: #FEF2F2;
+    color: #B91C1C;
+}
+/* ?ã h?y */
